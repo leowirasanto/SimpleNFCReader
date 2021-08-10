@@ -10,8 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     var nfcSession: NFCReaderSession?
-    var sessionTag: NFCTagReaderSession?
     var writer: NFCNDEFTag?
+    var tagSession: NFCTagReaderSession?
     var word = "None"
 
     private lazy var scanButton: UIButton = {
@@ -78,8 +78,14 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func scanTapped() {
-        self.nfcSession = NFCNDEFReaderSession.init(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        self.nfcSession?.begin()
+//        self.nfcSession = NFCNDEFReaderSession.init(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+//        self.nfcSession = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
+//        self.nfcSession?.alertMessage = "Tap to scan"
+//        self.nfcSession?.begin()
+
+        tagSession = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
+        tagSession?.alertMessage = "Hold your iPhone near the item to learn more about it."
+        tagSession?.begin()
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,3 +120,18 @@ extension HomeViewController: NFCNDEFReaderSessionDelegate {
     }
 }
 
+extension HomeViewController: NFCTagReaderSessionDelegate {
+    func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
+        print("Did become active")
+    }
+
+    func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+        print(error.localizedDescription)
+    }
+
+    func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        print(tags)
+    }
+
+
+}
