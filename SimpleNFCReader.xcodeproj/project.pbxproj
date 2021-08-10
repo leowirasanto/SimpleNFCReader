@@ -15,6 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E518E8AA26C268AD007564EE /* SimpleNFCReaderRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleNFCReaderRelease.entitlements; sourceTree = "<group>"; };
+		E518E8AB26C268CD007564EE /* SimpleNFCReaderDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleNFCReaderDebug.entitlements; sourceTree = "<group>"; };
 		E5A5820D26AE9DC700159501 /* SimpleNFCReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleNFCReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5A5821026AE9DC700159501 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5A5821226AE9DC700159501 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,8 @@
 		E5A5820F26AE9DC700159501 /* SimpleNFCReader */ = {
 			isa = PBXGroup;
 			children = (
+				E518E8AB26C268CD007564EE /* SimpleNFCReaderDebug.entitlements */,
+				E518E8AA26C268AD007564EE /* SimpleNFCReaderRelease.entitlements */,
 				E5A5821026AE9DC700159501 /* AppDelegate.swift */,
 				E5A5821226AE9DC700159501 /* SceneDelegate.swift */,
 				E5A5821426AE9DC700159501 /* HomeViewController.swift */,
@@ -274,14 +278,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SimpleNFCReader/SimpleNFCReaderDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = Q28L7TLQ68;
 				INFOPLIST_FILE = SimpleNFCReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = leowirasanto.SimpleNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.go-jek.ent.staging.develop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.go-jek.ent.staging.develop";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -292,14 +300,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SimpleNFCReader/SimpleNFCReaderRelease.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = Q28L7TLQ68;
 				INFOPLIST_FILE = SimpleNFCReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = leowirasanto.SimpleNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.go-jek.ent.staging.develop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.go-jek.ent.staging.develop";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     var nfcSession: NFCReaderSession?
+    var sessionTag: NFCTagReaderSession?
+    var writer: NFCNDEFTag?
     var word = "None"
 
     private lazy var scanButton: UIButton = {
@@ -63,7 +65,7 @@ class HomeViewController: UIViewController {
             messageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
 
             scanButton.heightAnchor.constraint(equalToConstant: 45),
-            scanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            scanButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             scanButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         let scanBtnWidth = scanButton.widthAnchor.constraint(equalToConstant: 20)
@@ -76,9 +78,8 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func scanTapped() {
-        nfcSession = NFCNDEFReaderSession.init(delegate: self, queue: nil, invalidateAfterFirstRead: true)
-        nfcSession?.begin()
-
+        self.nfcSession = NFCNDEFReaderSession.init(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+        self.nfcSession?.begin()
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,8 +93,13 @@ extension HomeViewController: NFCNDEFReaderSessionDelegate {
         print("The session was invalidated: \(error.localizedDescription)")
     }
 
+    func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {
+        print(tags)
+    }
+
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         var result = ""
+
         for payload in messages[0].records {
             result += String.init(data: payload.payload.advanced(by: 3), encoding: .utf8) ?? "Format not supported"
         }
@@ -101,6 +107,10 @@ extension HomeViewController: NFCNDEFReaderSessionDelegate {
         DispatchQueue.main.async {
             self.messageLabel.text = result
         }
+    }
+
+    func readerSessionDidBecomeActive(_ session: NFCNDEFReaderSession) {
+        print("nfc read session active \(session)")
     }
 }
 
